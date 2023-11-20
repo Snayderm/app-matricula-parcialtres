@@ -37,7 +37,7 @@ class CarreraController extends Controller
     {
         $carrera = new Carrera();        
         $carrera ->nombre =$request->nombre;
-        $carrera ->observacion =$request->observacion;               
+        $carrera ->detalle =$request->detalle;               
         $carrera->save();
 
         $carreras = DB::table('carreras')        
@@ -73,7 +73,7 @@ class CarreraController extends Controller
     {
         $carrera = Carrera::find($id);        
         $carrera->nombre = $request->nombre;       
-        $carrera->observacion =$request->observacion;
+        $carrera->detalle =$request->detalle;
         $carrera->save();
  
         $carreras = DB::table('carreras')       
