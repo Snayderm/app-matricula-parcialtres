@@ -95,4 +95,4 @@ class CarreraController extends Controller
         ->get();
         return view('carrera.index',['carreras'=>$carreras]);
     }
-}
+} 
