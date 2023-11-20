@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use Illuminate\Support\Facades\DB;
 
-
 class EstudianteController extends Controller
 {
     /**
@@ -14,11 +13,12 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        $estudiantes =DB::table('estudiantes')       
-       ->join('carreras', 'estudiantes.carreraid', '=', 'carreras.id')       
-        ->select('estudiantes.*', 'carreras.nombre as nombre_carrera')//se coloca un alias para solucionar el problema de que en el campo de nombre del estudiante se veia el nombre de la carrera
-       ->get();
-       return view("estudiante.index",['estudiantes' => $estudiantes]);
+        $estudiantes = DB::table('estudiantes')
+            ->join('carreras', 'estudiantes.carreraid', '=', 'carreras.id')
+            ->select('estudiantes.*', 'carreras.nombre as nombre_carrera')
+            ->get();
+
+        return view('estudiante.index', ['estudiantes' => $estudiantes]);
     }
 
     /**
@@ -26,10 +26,11 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        $carreras = DB::table('carreras')    
-        ->orderBy("nombre")    
-        ->get();
-        return view('estudiante.new',['carreras'=>$carreras]);
+        $carreras = DB::table('carreras')
+            ->orderBy('nombre')
+            ->get();
+
+        return view('estudiante.new', ['carreras' => $carreras]);
     }
 
     /**
@@ -37,20 +38,16 @@ class EstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        $estudiante = new Estudiante();        
-        $estudiante ->nombre =$request->nombre;
-        $estudiante ->apellido =$request->apellido;
-        $estudiante ->documento =$request->cedula;
-        $estudiante ->email =$request->email;
-        $estudiante ->celular =$request->telefono;
-        $estudiante ->carreraid =$request->carreraid;        
+        $estudiante = new Estudiante();
+        $estudiante->nombre = $request->nombre;
+        $estudiante->apellido = $request->apellido;
+        $estudiante->documento = $request->documento;
+        $estudiante->email = $request->email;
+        $estudiante->celular = $request->celular;
+        $estudiante->carreraid = $request->carreraid;
         $estudiante->save();
 
-        $estudiantes = DB::table('estudiantes')       
-        ->join('carreras', 'estudiantes.carreraid', '=', 'carreras.id')
-        ->select('estudiantes.*', "carreras.nombre") 
-        ->get();
-        return view('estudiante.index',['estudiantes'=>$estudiantes]);
+        return redirect()->route('estudiantes.index');
     }
 
     /**
@@ -58,7 +55,7 @@ class EstudianteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // No implementado
     }
 
     /**
@@ -67,10 +64,11 @@ class EstudianteController extends Controller
     public function edit(string $id)
     {
         $estudiante = Estudiante::find($id);
-        $carreras = DB::table('carreras')   
-         ->orderBy('nombre')    
-        ->get();
-        return view('estudiante.edit',['estudiante'=>$estudiante, 'carreras'=> $carreras ]);
+        $carreras = DB::table('carreras')
+            ->orderBy('nombre')
+            ->get();
+
+        return view('estudiante.edit', ['estudiante' => $estudiante, 'carreras' => $carreras]);
     }
 
     /**
@@ -78,19 +76,16 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $estudiante = Estudiante::find($id);            
-        $estudiante ->nombre =$request->nombre;
-        $estudiante ->apellido =$request->apellido;
-        $estudiante ->documento =$request->cedula;
-        $estudiante ->email =$request->email;
-        $estudiante ->celular =$request->telefono;
-        $estudiante ->carrera =$request->carrera;        
+        $estudiante = Estudiante::find($id);
+        $estudiante->nombre = $request->nombre;
+        $estudiante->apellido = $request->apellido;
+        $estudiante->documento = $request->documento;
+        $estudiante->email = $request->email;
+        $estudiante->celular = $request->celular;
+        $estudiante->carreraid = $request->carreraid;
         $estudiante->save();
- 
-        $estudiantes = DB::table('estudiantes')       
-        ->select('estudiantes.*') 
-        ->get();
-        return view('estudiante.index',['estudiantes'=>$estudiantes]);
+
+        return redirect()->route('estudiantes.index');
     }
 
     /**
@@ -98,12 +93,9 @@ class EstudianteController extends Controller
      */
     public function destroy(string $id)
     {
-        $estudiante = Estudiante::find($id);        
-        $estudiante->delete();        
-        
-        $estudiantes = DB::table('estudiantes')        
-        ->select('estudiantes.*')
-        ->get();
-        return view('estudiante.index',['estudiantes'=>$estudiantes]);
+        $estudiante = Estudiante::find($id);
+        $estudiante->delete();
+
+        return redirect()->route('estudiantes.index');
     }
 }

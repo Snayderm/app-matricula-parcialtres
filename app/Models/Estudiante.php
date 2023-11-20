@@ -16,4 +16,9 @@ class Estudiante extends Model
         'celular',
         'carreraid',
     ];
+
+public function carrera()
+{
+    return $this->belongsTo(Carrera::class, 'carreraid');
+}
 }
