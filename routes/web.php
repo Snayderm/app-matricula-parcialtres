@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CarreraController;
+use App\Http\Controllers\EstudianteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/carreras/{carrera}',[CarreraController::class, 'destroy'])->name('carreras.destroy');
     Route::put('/carreras/{carrera}',[CarreraController::class, 'update'])->name('carreras.update');
     Route::get('/carreras/{carrera}/edit',[CarreraController::class, 'edit'])->name('carreras.edit');
+
+
+    Route::get('/estudiantes',[EstudianteController::class, 'index'])->name('estudiantes.index');
+    Route::post('/estudiantes',[EstudianteController::class, 'store'])->name('estudiantes.store');
+    Route::get('/estudiantes/create',[EstudianteController::class, 'create'])->name('estudiantes.create');
+    Route::delete('/estudiantes/{estudiante}',[EstudianteController::class, 'destroy'])->name('estudiantes.destroy');
+    Route::put('/estudiantes/{estudiante}',[EstudianteController::class, 'update'])->name('estudiantes.update');
+    Route::get('/estudiantes/{estudiante}/edit',[EstudianteController::class, 'edit'])->name('estudiantes.edit');
 
 });
 
