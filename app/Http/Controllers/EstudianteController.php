@@ -40,9 +40,9 @@ class EstudianteController extends Controller
         $estudiante = new Estudiante();        
         $estudiante ->nombre =$request->nombre;
         $estudiante ->apellido =$request->apellido;
-        $estudiante ->cedula =$request->cedula;
+        $estudiante ->documento =$request->cedula;
         $estudiante ->email =$request->email;
-        $estudiante ->telefono =$request->telefono;
+        $estudiante ->celular =$request->telefono;
         $estudiante ->carreraid =$request->carreraid;        
         $estudiante->save();
 
@@ -81,9 +81,9 @@ class EstudianteController extends Controller
         $estudiante = Estudiante::find($id);            
         $estudiante ->nombre =$request->nombre;
         $estudiante ->apellido =$request->apellido;
-        $estudiante ->cedula =$request->cedula;
+        $estudiante ->documento =$request->cedula;
         $estudiante ->email =$request->email;
-        $estudiante ->telefono =$request->telefono;
+        $estudiante ->celular =$request->telefono;
         $estudiante ->carrera =$request->carrera;        
         $estudiante->save();
  
