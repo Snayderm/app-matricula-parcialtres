@@ -11,9 +11,9 @@ class Estudiante extends Model
     protected $fillable = [
         'nombre',
         'apellido',
-        'cedula',
+        'documento',
         'email',
-        'telefono',
+        'celular',
         'carreraid',
     ];
 }
